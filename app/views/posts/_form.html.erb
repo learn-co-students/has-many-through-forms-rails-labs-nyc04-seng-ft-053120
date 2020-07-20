@@ -1,1 +1,18 @@
+<%# checkboxes for categories and a field to create a new category, add the find or create by to model %>
 
+<%= form_for @post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br><br>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <br><br>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+  <br><br>
+  <%= f.fields_for :categories, post.categories.build do |category| %>
+    <%= category.label :name %>
+    <%= category.text_field :name %>
+  <% end %>
+  <br><br>
+  <%= f.submit %>
+<% end %>
